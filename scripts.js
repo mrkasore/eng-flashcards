@@ -58,10 +58,11 @@ function addDomCard(words, i) {
 
 
     remove_btn.addEventListener('click', function(e) {
-        console.log(e.target.parentNode.data);
-        words.splice(e.target.parentElement.data, 1);
+        console.log(parseInt(e.target.parentNode.getAttribute('data')));
+        words.splice(parseInt(e.target.parentElement.getAttribute('data')), 1);
         e.target.parentElement.remove();
         
+        refreshData();
         console.log(words);
         
     });
@@ -74,20 +75,17 @@ function addDomCard(words, i) {
 }
 
 function RemoveCard() {
-
+    
 }
 
-// Remove btn in progress
-removeBtns.forEach(item => {
-    item.addEventListener('click', function(e) {
-        console.log(e.target.parentNode.data);
-        words.splice(e.target.parentElement.data, 1);
-        
-        e.target.parentElement.remove();
-        console.log(words);
-        
-    })
-})
+
+function refreshData() {
+    let allCards = document.querySelectorAll('.card');
+    for (let i = 0; i < words.length; i++) {
+        allCards[i].removeAttribute('data');
+        allCards[i].setAttribute('data', i);
+    }
+}
 
 addWordBtn.addEventListener('click', addNewWord);
 
