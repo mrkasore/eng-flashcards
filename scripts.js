@@ -57,15 +57,8 @@ function addDomCard(words, i) {
 
 
 
-    remove_btn.addEventListener('click', function(e) {
-        console.log(parseInt(e.target.parentNode.getAttribute('data')));
-        words.splice(parseInt(e.target.parentElement.getAttribute('data')), 1);
-        e.target.parentElement.remove();
-        
-        refreshData();
-        console.log(words);
-        
-    });
+    remove_btn.addEventListener('click', removeCard);
+    
 
     card.append(original);
     card.append(translate);
@@ -74,8 +67,15 @@ function addDomCard(words, i) {
     
 }
 
-function RemoveCard() {
-    
+function removeCard(e) {
+    console.log(e.target);
+
+    console.log(parseInt(e.target.parentNode.getAttribute('data')));
+    words.splice(parseInt(e.target.parentElement.getAttribute('data')), 1);
+    e.target.parentElement.remove();
+        
+    refreshData();
+    console.log(words);
 }
 
 
