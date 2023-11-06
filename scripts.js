@@ -1,6 +1,7 @@
 const words = [];
 const container = document.querySelector('.container');
 const addWordBtn = document.querySelector('#add-word-btn');
+const removeBtns = document.querySelectorAll('.remove-btn');
 
 function Word(original, translate) {
     this.original = original;
@@ -9,9 +10,11 @@ function Word(original, translate) {
 
 let sub = new Word('subway', 'метро');
 let train = new Word('train', 'поезд');
+let cat = new Word('cat', 'кот');
 
 words.push(sub);
 words.push(train);
+words.push(cat);
 
 //Create page from start
 function createPage() {
@@ -39,6 +42,8 @@ function addNewWord() {
 function addDomCard(words, i) {
     let card = document.createElement('div');
     card.setAttribute('class', 'card');
+    //Add data attribute
+    card.setAttribute('data', i);
 
     let original = document.createElement('div');
     original.innerText = words[i].original;
@@ -46,10 +51,43 @@ function addDomCard(words, i) {
     let translate = document.createElement('div');
     translate.innerHTML = words[i].translate;
 
+    let remove_btn = document.createElement('button');
+    remove_btn.setAttribute('class', 'remove-btn');
+    remove_btn.innerHTML = 'Remove';
+
+
+
+    remove_btn.addEventListener('click', function(e) {
+        console.log(e.target.parentNode.data);
+        words.splice(e.target.parentElement.data, 1);
+        e.target.parentElement.remove();
+        
+        console.log(words);
+        
+    });
+
     card.append(original);
     card.append(translate);
+    card.append(remove_btn);
     container.append(card);
+    
 }
+
+function RemoveCard() {
+
+}
+
+// Remove btn in progress
+removeBtns.forEach(item => {
+    item.addEventListener('click', function(e) {
+        console.log(e.target.parentNode.data);
+        words.splice(e.target.parentElement.data, 1);
+        
+        e.target.parentElement.remove();
+        console.log(words);
+        
+    })
+})
 
 addWordBtn.addEventListener('click', addNewWord);
 
