@@ -1,0 +1,20 @@
+* {
+    background-color: aqua;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+    gap: 3rem;
+    font-size: 30px;
+}
+
+.container .card {
+    border: solid 1px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
