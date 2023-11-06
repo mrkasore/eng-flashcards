@@ -3,6 +3,8 @@ const container = document.querySelector('.container');
 const addWordBtn = document.querySelector('#add-word-btn');
 const removeBtns = document.querySelectorAll('.remove-btn');
 
+const addWordSection = document.querySelector('.addWord');
+
 function Word(original, translate) {
     this.original = original;
     this.translate = translate;
@@ -33,6 +35,9 @@ function addNewWord() {
     words.push(newWord);
 
     addDomCard(words, words.length-1);
+
+    document.querySelector('.open_form').style.display = 'block';
+    document.querySelector('.addWord').style.display = 'none';
 
     event.preventDefault();
 
@@ -88,5 +93,11 @@ function refreshData() {
 }
 
 addWordBtn.addEventListener('click', addNewWord);
+
+document.querySelector('.addWord').style.display = 'none';
+document.querySelector('.open_form').addEventListener('click', function(e) {
+    document.querySelector('.open_form').style.display = 'none';
+    document.querySelector('.addWord').style.display = 'block';
+})
 
 createPage();
