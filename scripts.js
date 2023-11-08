@@ -1,4 +1,4 @@
-const words = [];
+let words = [];
 const container = document.querySelector('.container');
 const addWordBtn = document.querySelector('#add-word-btn');
 const removeBtns = document.querySelectorAll('.remove-btn');
@@ -18,6 +18,14 @@ words.push(sub);
 words.push(train);
 words.push(cat);
 
+if(localStorage.getItem("user")) {
+    words = JSON.parse(localStorage.getItem("user"));
+}
+
+
+
+
+
 //Create page from start
 function createPage() {
     for(let i = 0; i < words.length; i++) {
@@ -34,12 +42,23 @@ function addNewWord() {
     let newWord = new Word(original_word, translate_word);
     words.push(newWord);
 
+    //localStorage.user = JSON.stringify(words);
+
+    
+    // немного позже
+    //let user = JSON.parse( localStorage.user );
+    //alert( user.name ); // John
+
     addDomCard(words, words.length-1);
 
     document.querySelector('.open_form').style.display = 'block';
     document.querySelector('.addWord').style.display = 'none';
 
     event.preventDefault();
+
+    localStorage.setItem('user', JSON.stringify(words));
+
+
 
 }
 
@@ -73,14 +92,11 @@ function addDomCard(words, i) {
 }
 
 function removeCard(e) {
-    console.log(e.target);
-
-    console.log(parseInt(e.target.parentNode.getAttribute('data')));
     words.splice(parseInt(e.target.parentElement.getAttribute('data')), 1);
+    localStorage.setItem('user', JSON.stringify(words));
     e.target.parentElement.remove();
         
     refreshData();
-    console.log(words);
 }
 
 
