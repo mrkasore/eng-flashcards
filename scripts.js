@@ -18,7 +18,9 @@ words.push(sub);
 words.push(train);
 words.push(cat);
 
-if(localStorage.getItem("user")) {
+console.log(localStorage.getItem("user") && localStorage.getItem("user"));
+
+if(localStorage.getItem("user") && localStorage.getItem("user") != '[]') {
     words = JSON.parse(localStorage.getItem("user"));
 }
 
@@ -51,8 +53,8 @@ function addNewWord() {
 
     addDomCard(words, words.length-1);
 
-    document.querySelector('.open_form').style.display = 'block';
     document.querySelector('.addWord').style.display = 'none';
+    document.querySelector('.main_container').style.opacity = 1;
 
     event.preventDefault();
 
@@ -112,8 +114,8 @@ addWordBtn.addEventListener('click', addNewWord);
 
 document.querySelector('.addWord').style.display = 'none';
 document.querySelector('.open_form').addEventListener('click', function(e) {
-    document.querySelector('.open_form').style.display = 'none';
     document.querySelector('.addWord').style.display = 'block';
+    document.querySelector('.main_container').style.opacity = 0.3;
 })
 
 createPage();
